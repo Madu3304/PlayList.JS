@@ -20,7 +20,7 @@ const fetchData = async (url) => {
   }
 };
 
-// Insere músicas na página
+
 const insertSongsIntoPage = (songs) => {
   songsContainer.innerHTML = songs.map(song => `
     <li class="song">
@@ -29,7 +29,7 @@ const insertSongsIntoPage = (songs) => {
   `).join('');
 };
 
-// Filtra por artista
+//artista
 const filterByArtist = async (artist) => {
   const data = await fetchData(apiURL);
   if (!data) return;
@@ -39,7 +39,7 @@ const filterByArtist = async (artist) => {
   insertSongsIntoPage(filtered);
 };
 
-// Filtra por gênero
+//gênero
 const filterByGenre = async (genre) => {
   const data = await fetchData(apiURL);
   if (!data) return;
@@ -49,7 +49,7 @@ const filterByGenre = async (genre) => {
   insertSongsIntoPage(filtered);
 };
 
-// Filtra por música
+//música
 const filterByMusic = async (music) => {
   const data = await fetchData(apiURL);
   if (!data) return;
@@ -59,7 +59,7 @@ const filterByMusic = async (music) => {
   insertSongsIntoPage(filtered);
 };
 
-// Evento para clique nos botões (unchanged)
+//clique
 songsContainer.addEventListener('click', (event) => {
   const clickedElement = event.target;
 
@@ -77,9 +77,9 @@ songsContainer.addEventListener('click', (event) => {
   }
 });
 
-// Evento para envio do formulário
+
 form.addEventListener('submit', async (event) => {
-  event.preventDefault(); // Prevent default form submission
+  event.preventDefault(); 
 
   const artist = searchInputArtista.value.trim();
   const music = searchInputMusica.value.trim();
