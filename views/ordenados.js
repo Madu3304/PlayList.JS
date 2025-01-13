@@ -46,16 +46,15 @@ const sortArtists = (data) => {
 
 //gêneros
 const sortGenres = (data) => {
-    return data.sort((a, b) => {
+    return data.sort((a) => {
         const genreA = a.genre.toLowerCase();
-        const genreB = b.genre.toLowerCase();
-        return genreA < genreB ? -1 : genreA > genreB ? 1 : 0;
+        return genreA ? -1 : genreA > 1 ;
     });
 };
 
 submitVerAr.addEventListener('click', async (event) => {
     event.preventDefault(); 
-    const data = await fetchData(apiURL);
+    const data = await fetch(apiURL);
     if (!data) return;
     const sortedArtists = sortArtists(data);
     insertSongsIntoPage(sortedArtists);
@@ -63,7 +62,7 @@ submitVerAr.addEventListener('click', async (event) => {
 
 submitVerGene.addEventListener('click', async (event) => {
     event.preventDefault(); 
-    const data = await fetchData(apiURL);
+    const data = await fetch(apiURL);
     if (!data) return;
     const sortedGenres = sortGenres(data);
     insertSongs(sortedGenres);
