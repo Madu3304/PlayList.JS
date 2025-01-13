@@ -6,7 +6,7 @@ const submitVerGene = document.querySelector('#submitVerGene');
 
 const apiURL = 'https://guilhermeonrails.github.io/api-csharp-songs/songs.json';
 
-const fetch = async (url) => {
+const fetchData = async (url) => {
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -19,6 +19,7 @@ const fetch = async (url) => {
     }
 };
 
+//coloar músicas
 const insertSongsIntoPage = (songs) => {
     songsContainer.innerHTML = songs.map((song) => `
         <li class="song">
@@ -46,15 +47,16 @@ const sortArtists = (data) => {
 
 //gêneros
 const sortGenres = (data) => {
-    return data.sort((a) => {
+    return data.sort((a, b) => {
         const genreA = a.genre.toLowerCase();
-        return genreA ? -1 : genreA > 1 ;
+        const genreB = b.genre.toLowerCase();
+        return genreA < genreB ? -1 : genreA > genreB ? 1 : 0;
     });
 };
 
 submitVerAr.addEventListener('click', async (event) => {
     event.preventDefault(); 
-    const data = await fetch(apiURL);
+    const data = await fetchData(apiURL);
     if (!data) return;
     const sortedArtists = sortArtists(data);
     insertSongsIntoPage(sortedArtists);
@@ -62,8 +64,23 @@ submitVerAr.addEventListener('click', async (event) => {
 
 submitVerGene.addEventListener('click', async (event) => {
     event.preventDefault(); 
-    const data = await fetch(apiURL);
+    const data = await fetchData(apiURL);
     if (!data) return;
     const sortedGenres = sortGenres(data);
     insertSongs(sortedGenres);
 });
+
+const fetchLyrics = async (artist, songTitle) => {
+    const data = await fetData(`${apiURL}/v1/${artist}/${songTitle}`)
+
+    //ajustar as caracteristicas do texto. 
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>')
+    //replace aqui vai substituir um caracter por outro
+
+    songsContainer.innerHTML = `
+    <li class="lyrics-container">
+      <h2><strong>${songTitle}</strong> - ${artist}</h2>  
+      <p class="lyrics">${lyrics}</p>
+    </li>    
+    `
+  }
