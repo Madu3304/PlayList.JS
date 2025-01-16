@@ -36,19 +36,6 @@ const insertSongs = (songs) => {
     `).join('');
 };
 
-//AJUSTAR DEPOIS
-// const insertSongs = async (artist, genre) => {
-//     const data = await fetData(`${apiURL}/v1/${artist}/${genre}`);
-//     const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>'); 
-
-//     songsContainer.innerHTML = `
-//         <li class="song">
-//             <span class="song-genre"><strong>${genre}</strong></span>
-//             <p class="lyrics">${lyrics}</p> 
-//         </li>
-//     `;
-// };
-
 //artistas
 const sortArtists = (data) => {
     return data.sort((a, b) => {
@@ -82,21 +69,6 @@ submitVerGene.addEventListener('click', async (event) => {
     const sortedGenres = sortGenres(data);
     insertSongs(sortedGenres);
 });
-
-// const fetchLyrics = async (artist, genre) => {
-//     const data = await fetData(`${apiURL}/v1/${artist}/${genre}`);
-  
-//     // Ajustar as características do texto.
-//     const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>'); 
-//      //replace aqui vai substituir um caracter por outro
-     
-//     songsContainer.innerHTML = `
-//       <li class="lyrics-container" style="text-align: center;">
-//         <h2><strong>${genre}</strong> - ${artist}</h2>
-//         <p class="lyrics">${lyrics}</p> 
-//       </li>
-//     `;
-//   };
 
 const fetchLyrics = async (artist, genre) => {
     const data = await fetData(`${apiURL}/v1/${artist}/${genre}`);
